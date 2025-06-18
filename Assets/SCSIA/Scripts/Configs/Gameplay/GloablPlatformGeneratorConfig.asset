@@ -19,7 +19,7 @@ MonoBehaviour:
   maxSpawnByDirection: 5
   platformMinYFromPrevious: 2.5
   platformMaxYFromPrevious: 3
-  minPlatformsByStage: 6
-  maxPlatformsByStage: 6
+  minPlatformsByStage: 2
+  maxPlatformsByStage: 5
   chanceSpawnMoveablePlatform: 30
   chanceSpawnBonusonPlatform: 50
