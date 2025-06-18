@@ -1,5 +1,4 @@
-﻿using Unity.VisualScripting;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace SCSIA
@@ -81,7 +80,8 @@ namespace SCSIA
             if (_platformRigidbody)
                 return;
 
-            if (collision.gameObject.TryGetComponent<IPlatformCollision>(out IPlatformCollision platform))
+            IPlatformCollision platform = collision.gameObject.GetComponentInParent<IPlatformCollision>();
+            if (platform != null)
                 foreach (ContactPoint2D contact in collision.contacts)
                     if (contact.normal.y > 0.5f)
                     {
@@ -95,8 +95,9 @@ namespace SCSIA
         {
             if (!_platformRigidbody)
                 return;
-
-            if (collision.gameObject.TryGetComponent<IPlatformCollision>(out IPlatformCollision platform) && _platformRigidbody == platform.GetRigidbody())
+            
+            IPlatformCollision platform = collision.gameObject.GetComponentInParent<IPlatformCollision>();
+            if (platform != null && _platformRigidbody == platform.GetRigidbody())
             {
                 _platformRigidbody = null;
                 platform.OnPlayerExit();
