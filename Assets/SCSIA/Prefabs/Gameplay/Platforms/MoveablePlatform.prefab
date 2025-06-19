@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dd700a3c942c0846bc990c3dd6f3611, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  platformVisualConfig: {fileID: 11400000, guid: ff29544aa17d244498f1b5adb19c7acd, type: 2}
+  platformRendererConfig: {fileID: 11400000, guid: aef4ee618f9e1ce41868720c81a76547, type: 2}
   _platformRendererSpawnPoint: {fileID: 350861286400160743}
   _platformBonusSpawnPoint: {fileID: 767856182236245465}
   _platformEnemySpawnPoint: {fileID: 3108882782119719283}

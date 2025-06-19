@@ -8,7 +8,7 @@ namespace SCSIA
         // FIELDS
         //############################################################################################
         [Header("Platform renderer")]
-        [SerializeField] protected PlatformVisualConfig platformVisualConfig;
+        [SerializeField] protected PlatformRendererConfig platformRendererConfig;
         [SerializeField] protected Transform _platformRendererSpawnPoint;
 
         [Header("Platform bonus")]
@@ -36,14 +36,14 @@ namespace SCSIA
         //############################################################################################
         public void SetRandomSkin()
         {
-            int platformRendererType = Random.Range(0, platformVisualConfig._platformRendererPrefabs.Length);
+            int platformRendererType = Random.Range(0, platformRendererConfig._platformRendererPrefabs.Length);
             if (_platformRendererType != platformRendererType)
             {
                 // destroy old skin
                 foreach (Transform child in _platformRendererSpawnPoint)
                     Destroy(child.gameObject);
                 // create new skin
-                Instantiate(platformVisualConfig._platformRendererPrefabs[platformRendererType], _platformRendererSpawnPoint.position, Quaternion.identity, _platformRendererSpawnPoint);
+                Instantiate(platformRendererConfig._platformRendererPrefabs[platformRendererType], _platformRendererSpawnPoint.position, Quaternion.identity, _platformRendererSpawnPoint);
                 _platformRendererWidth = _platformRendererSpawnPoint.GetComponentInChildren<SpriteRenderer>().bounds.size.x;
                 _platformRendererType = platformRendererType;
             }
