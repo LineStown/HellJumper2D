@@ -12,10 +12,6 @@ namespace SCSIA
         //############################################################################################
         // PUBLIC METHODS
         //############################################################################################
-        public void OnPlayerEnter()
-        { }
-        public void OnPlayerExit()
-        { }
         public Rigidbody2D GetRigidbody()
         {
             return _platformRigidbody;

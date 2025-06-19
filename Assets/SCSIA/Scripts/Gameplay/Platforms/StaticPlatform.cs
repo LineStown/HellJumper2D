@@ -5,7 +5,8 @@ namespace SCSIA
     public class StaticPlatform : BasePlatform
     {
         //############################################################################################
-        // FIELDS
+        // PROPERTIES
         //############################################################################################
+        private StaticPlatformConfig PlatformConfig => _platformConfig as StaticPlatformConfig;
     }
 }

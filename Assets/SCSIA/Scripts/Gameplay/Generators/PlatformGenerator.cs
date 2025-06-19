@@ -38,7 +38,7 @@ namespace SCSIA
             _screenMaxX = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, 0, 0)).x;
             // create pools for platforms
             _platformPool = new List<Queue<BasePlatform>>();
-            for (int i = 0; i < _platformGeneratorConfig.platformPrefabs.Count; i++)
+            for (int i = 0; i < _platformGeneratorConfig.PlatformPrefabs.Count; i++)
                 _platformPool.Add(new Queue<BasePlatform>());
             _platformOnline = new List<List<BasePlatform>>();
             // update online platform list
@@ -69,15 +69,15 @@ namespace SCSIA
                 int countPlatformsUp = (_platformOnline.Count == 0) ? 0 : _platformOnline.Last().First().Stage - _playerStage;
                 int countPlatformsDown = (_platformOnline.Count == 0) ? 0 : _playerStage - _platformOnline.First().First().Stage;
                 // drop
-                if (countPlatformsUp > _platformGeneratorConfig.maxSpawnByDirection)
-                    DropPlatform(countPlatformsUp - _platformGeneratorConfig.maxSpawnByDirection, 1);
-                if (countPlatformsDown > _platformGeneratorConfig.maxSpawnByDirection)
-                    DropPlatform(countPlatformsDown - _platformGeneratorConfig.maxSpawnByDirection, -1);
+                if (countPlatformsUp > _platformGeneratorConfig.MaxSpawnByDirection)
+                    DropPlatform(countPlatformsUp - _platformGeneratorConfig.MaxSpawnByDirection, 1);
+                if (countPlatformsDown > _platformGeneratorConfig.MaxSpawnByDirection)
+                    DropPlatform(countPlatformsDown - _platformGeneratorConfig.MaxSpawnByDirection, -1);
                 // spawn
-                if (countPlatformsUp < _platformGeneratorConfig.maxSpawnByDirection)
-                    GeneratePlatform(_platformGeneratorConfig.maxSpawnByDirection - countPlatformsUp, 1);
-                if (countPlatformsDown < _platformGeneratorConfig.maxSpawnByDirection)
-                    GeneratePlatform(_platformGeneratorConfig.maxSpawnByDirection - countPlatformsDown, -1);
+                if (countPlatformsUp < _platformGeneratorConfig.MaxSpawnByDirection)
+                    GeneratePlatform(_platformGeneratorConfig.MaxSpawnByDirection - countPlatformsUp, 1);
+                if (countPlatformsDown < _platformGeneratorConfig.MaxSpawnByDirection)
+                    GeneratePlatform(_platformGeneratorConfig.MaxSpawnByDirection - countPlatformsDown, -1);
             }
         }
 
@@ -87,10 +87,10 @@ namespace SCSIA
             {
                 // platform can be spawed between 0 and maxStage
                 int nextStage = (_platformOnline.Count() > 0) ? (((direction == 1) ? _platformOnline.Last().First().Stage : _platformOnline.First().First().Stage) + direction) : 1;
-                if (nextStage < 1 || nextStage > _platformGeneratorConfig.maxStage)
+                if (nextStage < 1 || nextStage > _platformGeneratorConfig.MaxStage)
                     return;
                 // generate count platform by this stage. result count can be lower if stage does not have free space
-                int maxPlatformsByCurrentStage = Random.Range(_platformGeneratorConfig.minPlatformsByStage, _platformGeneratorConfig.maxPlatformsByStage + 1);
+                int maxPlatformsByCurrentStage = Random.Range(_platformGeneratorConfig.MinPlatformsByStage, _platformGeneratorConfig.MaxPlatformsByStage + 1);
                 List<BasePlatform> platformGroup = new List<BasePlatform>();
                 while (true)
                 {
@@ -99,7 +99,7 @@ namespace SCSIA
                         break;
                     // prepare new platform
                     PlatformPlacePointInfo platformPlacePointInfo = CalculatePlatformPlaceInfo(platformGroup);
-                    BasePlatform platform = GetPlatformFromPool(Random.Range(0, _platformGeneratorConfig.platformPrefabs.Count()));
+                    BasePlatform platform = GetPlatformFromPool(Random.Range(0, _platformGeneratorConfig.PlatformPrefabs.Count()));
                     platform.SetRandomSkin();
                     if (!platform.CorrectPlatformPlacePointInfo(ref platformPlacePointInfo))
                     {
@@ -109,15 +109,17 @@ namespace SCSIA
                     // generate platform X
                     float platformX = Random.Range(platformPlacePointInfo.minX, platformPlacePointInfo.maxX);
                     // generate platform Y
-                    float platformY = ((_platformOnline.Count() == 0) ? _bottomTarget : ((direction == 1) ? _platformOnline.Last().First().transform : _platformOnline.First().First().transform)).position.y;
-                    platformY += Random.Range(_platformGeneratorConfig.platformMinYFromPrevious, _platformGeneratorConfig.platformMaxYFromPrevious) * direction;
+                    float platformY = _bottomTarget.position.y + _platformGeneratorConfig.PlatformY * nextStage + Random.Range(0, _platformGeneratorConfig.PlatformYDiff) * direction;
                     // place paltform
                     platform.transform.position = new Vector3(platformX, platformY, 0);
                     platform.Stage = nextStage;
-                    // create bonus
-                    int chance = Random.Range(0, 101);
-                    if (chance <= _platformGeneratorConfig.chanceSpawnBonusOnPlatform)
+                    // spawn type
+                    SpawnType spawnType = GetSpawnType();
+                    if (spawnType == SpawnType.Bonus)
                         platform.SetRandomBonus();
+                    else if (spawnType == SpawnType.Enemy)
+                        platform.SetRandomEnemy();
+                    // activate
                     platform.gameObject.SetActive(true);
                     platformGroup.Add(platform);
                 }
@@ -150,7 +152,7 @@ namespace SCSIA
             if (_platformPool[platformType].Count > 0)
                 return _platformPool[platformType].Dequeue();
             // create new platform to pool if queue for this type is empty
-            BasePlatform platform = Instantiate(_platformGeneratorConfig.platformPrefabs[platformType], Vector3.zero, Quaternion.identity, _platformPoolParent);
+            BasePlatform platform = Instantiate(_platformGeneratorConfig.PlatformPrefabs[platformType], Vector3.zero, Quaternion.identity, _platformPoolParent);
             platform.PlatformType = platformType;
             platform.gameObject.SetActive(false);
             return platform;
@@ -190,6 +192,21 @@ namespace SCSIA
                 }
             }
             return result;
+        }
+
+        private SpawnType GetSpawnType()
+        {
+            int totalChance = _platformGeneratorConfig.ChanceSpawnBonusOnPlatform;
+            totalChance += _platformGeneratorConfig.ChanceSpawnEnemyOnPlatform;
+            totalChance += _platformGeneratorConfig.ChanceSpawnNothingOnPlatform;
+            int chance = Random.Range(0, totalChance);
+
+            if (chance < _platformGeneratorConfig.ChanceSpawnBonusOnPlatform)
+                return SpawnType.Bonus;
+            else if (chance < _platformGeneratorConfig.ChanceSpawnBonusOnPlatform + _platformGeneratorConfig.ChanceSpawnEnemyOnPlatform)
+                return SpawnType.Enemy;
+            else
+                return SpawnType.Nothing;
         }
     }
 }

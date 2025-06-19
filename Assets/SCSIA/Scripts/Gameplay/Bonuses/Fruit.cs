@@ -2,7 +2,7 @@
 
 namespace SCSIA
 {
-    public class Bonus : MonoBehaviour, IBonusCollision
+    public class Fruit : MonoBehaviour, IBonusCollision
     {
         //############################################################################################
         // FIELDS

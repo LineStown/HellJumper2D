@@ -9,21 +9,17 @@ namespace SCSIA
         // FIELDS
         //############################################################################################
         [Header("Platform config")]
-        [SerializeField] protected PlatformConfig platformConfig;
+        [SerializeField] protected BasePlatformConfig _platformConfig;
 
-        [Header("Platform renderer")]
+        [Header("Platform spawn point")]
         [SerializeField] protected Transform _platformRendererSpawnPoint;
-
-        [Header("Platform bonus")]
         [SerializeField] protected Transform _platformBonusSpawnPoint;
-
-        [Header("Platform enemy")]
         [SerializeField] protected Transform _platformEnemySpawnPoint;
 
         [Header("Platform properties")]
         [SerializeField] protected Rigidbody2D _platformRigidbody;
 
-        private int _platformRendererType;
+        protected int _platformRendererType;
         protected float _platformRendererWidth;
 
         protected PlatformPlacePointInfo _platformPlacePointInfo;
@@ -37,26 +33,32 @@ namespace SCSIA
         //############################################################################################
         // PUBLIC  METHODS
         //############################################################################################
-        public void SetRandomSkin()
+        public virtual void SetRandomSkin()
         {
-            CleanPlatform();
-            int platformRendererType = Random.Range(0, platformConfig._platformRendererPrefabs.Count());
+            ClearPlatform();
+            int platformRendererType = Random.Range(0, _platformConfig.PlatformRendererPrefabs.Count());
             if (_platformRendererType != platformRendererType)
             {
                 // destroy old skin
                 foreach (Transform child in _platformRendererSpawnPoint)
                     Destroy(child.gameObject);
                 // create new skin
-                Instantiate(platformConfig._platformRendererPrefabs[platformRendererType], _platformRendererSpawnPoint.position, Quaternion.identity, _platformRendererSpawnPoint);
+                Instantiate(_platformConfig.PlatformRendererPrefabs[platformRendererType], _platformRendererSpawnPoint.position, Quaternion.identity, _platformRendererSpawnPoint);
                 _platformRendererWidth = _platformRendererSpawnPoint.GetComponentInChildren<SpriteRenderer>().bounds.size.x;
                 _platformRendererType = platformRendererType;
-            }  
+            }
         }
 
-        public void SetRandomBonus()
+        public virtual void SetRandomBonus()
         {
-            int platformBonusType = Random.Range(0, platformConfig._platformBonusPrefabs.Count());
-            Instantiate(platformConfig._platformBonusPrefabs[platformBonusType], _platformBonusSpawnPoint.position, Quaternion.identity, _platformBonusSpawnPoint);
+            int platformBonusType = Random.Range(0, _platformConfig.PlatformBonusPrefabs.Count());
+            Instantiate(_platformConfig.PlatformBonusPrefabs[platformBonusType], _platformBonusSpawnPoint.position, Quaternion.identity, _platformBonusSpawnPoint);
+        }
+
+        public virtual void SetRandomEnemy()
+        {
+            int platformEnemyType = Random.Range(0, _platformConfig.PlatformEnemyPrefabs.Count());
+            Instantiate(_platformConfig.PlatformEnemyPrefabs[platformEnemyType], _platformEnemySpawnPoint.position, Quaternion.identity, _platformEnemySpawnPoint);
         }
 
         public virtual bool CorrectPlatformPlacePointInfo(ref PlatformPlacePointInfo platformPlacePointInfo)
@@ -72,10 +74,6 @@ namespace SCSIA
             return new PlatformPlacePointInfo(this.gameObject.transform.position.x - _platformRendererWidth / 2f, this.gameObject.transform.position.x + _platformRendererWidth / 2f, _platformRendererWidth);
         }
 
-        public virtual void OnPlayerEnter()
-        { }
-        public virtual void OnPlayerExit()
-        { }
         public Rigidbody2D GetRigidbody()
         {
             return _platformRigidbody;
@@ -89,7 +87,10 @@ namespace SCSIA
             _platformRendererType = -1;
         }
 
-        protected virtual void CleanPlatform()
+        //############################################################################################
+        // PRIVATE METHODS
+        //############################################################################################
+        private void ClearPlatform()
         {
             DropBonus();
             DropEnemy();
@@ -97,7 +98,6 @@ namespace SCSIA
 
         private void DropBonus()
         {
-            // destroy old bonus
             foreach (Transform child in _platformBonusSpawnPoint)
                 Destroy(child.gameObject);
 
@@ -105,13 +105,8 @@ namespace SCSIA
 
         private void DropEnemy()
         {
-            // destroy old bonus
             foreach (Transform child in _platformEnemySpawnPoint)
                 Destroy(child.gameObject);
         }
-
-        //############################################################################################
-        // PRIVATE METHODS
-        //############################################################################################
     }
 }

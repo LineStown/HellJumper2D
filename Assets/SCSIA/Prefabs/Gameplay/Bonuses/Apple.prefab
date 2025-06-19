@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7517984419578901739}
   - component: {fileID: 4736026773137934701}
+  - component: {fileID: 8691649306152903362}
   - component: {fileID: 3621794740253738287}
   - component: {fileID: 215082203815012876}
-  - component: {fileID: 7785226107697461388}
   m_Layer: 0
   m_Name: Apple
   m_TagString: Untagged
@@ -90,6 +90,28 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &8691649306152903362
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6615567815988553038}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f8de84b14aa533e43bed624f68c11557, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!58 &3621794740253738287
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -125,7 +147,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.2
+  m_Radius: 0.25
 --- !u!114 &215082203815012876
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -139,19 +161,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _eBonusType: 0
---- !u!111 &7785226107697461388
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6615567815988553038}
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Animation: {fileID: 0}
-  m_Animations: []
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_UpdateMode: 0
-  m_CullingType: 0

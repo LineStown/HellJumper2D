@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1111475796768943102}
   - component: {fileID: 1515225663436740714}
+  - component: {fileID: 5276993423185352960}
   - component: {fileID: 1602358755482776942}
   - component: {fileID: 5453694944264751935}
   m_Layer: 0
@@ -89,6 +90,28 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &5276993423185352960
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3135240052518467009}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 34b1a48986ef2bc4a9e3f9ed5b8c60ae, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!58 &1602358755482776942
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -124,7 +147,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.2
+  m_Radius: 0.25
 --- !u!114 &5453694944264751935
 MonoBehaviour:
   m_ObjectHideFlags: 0

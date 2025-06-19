@@ -33,6 +33,19 @@ namespace SCSIA
     public enum EBonusType
     {
         Apple,
-        Banana
+        Banana,
+        Cherry,
+        Kiwi,
+        Melon,
+        Orange,
+        Pineaplle,
+        Strawberry
+    }
+
+    public enum SpawnType
+    {
+        Bonus,
+        Enemy,
+        Nothing
     }
 }

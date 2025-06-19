@@ -12,7 +12,7 @@ namespace SCSIA
         [SerializeField] private Animator _playerAnimator;
         [SerializeField] private float _playerJumpfForce;
         [SerializeField] private float _playerRunSpeed;
-        [SerializeField] private BonusConfig _bonusConfig;
+        [SerializeField] private PointBonusConfig _pointBonusConfig;
 
         private InputSystem _inputSystem;
         private Vector3 _playerLeftTurn;
@@ -87,7 +87,6 @@ namespace SCSIA
                     if (contact.normal.y > 0.5f)
                     {
                         _platformRigidbody = platform.GetRigidbody();
-                        platform.OnPlayerEnter();
                         break;
                     }
         }
@@ -101,7 +100,6 @@ namespace SCSIA
             if (platform != null && _platformRigidbody == platform.GetRigidbody())
             {
                 _platformRigidbody = null;
-                platform.OnPlayerExit();
             }
         }
 
@@ -110,7 +108,7 @@ namespace SCSIA
             IBonusCollision bonus = collision.gameObject.GetComponentInParent<IBonusCollision>();
             if(bonus != null)
             {
-                Debug.Log($"Player got bonus: type {bonus.GetBonusType()} points {_bonusConfig.GetPointsByBonus(bonus.GetBonusType())}");
+                Debug.Log($"Player got bonus: type {bonus.GetBonusType()} points {_pointBonusConfig.GetPointsByBonus(bonus.GetBonusType())}");
                 bonus.OnPlayerEnter();
             }
         }
