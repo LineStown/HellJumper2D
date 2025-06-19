@@ -38,7 +38,7 @@ namespace SCSIA
             _screenMaxX = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, 0, 0)).x;
             // create pools for platforms
             _platformPool = new List<Queue<BasePlatform>>();
-            for (int i = 0; i < _platformGeneratorConfig.platformPrefabs.Length; i++)
+            for (int i = 0; i < _platformGeneratorConfig.platformPrefabs.Count; i++)
                 _platformPool.Add(new Queue<BasePlatform>());
             _platformOnline = new List<List<BasePlatform>>();
             // update online platform list
@@ -99,7 +99,7 @@ namespace SCSIA
                         break;
                     // prepare new platform
                     PlatformPlacePointInfo platformPlacePointInfo = CalculatePlatformPlaceInfo(platformGroup);
-                    BasePlatform platform = GetPlatformFromPool(Random.Range(0, _platformGeneratorConfig.platformPrefabs.Length));
+                    BasePlatform platform = GetPlatformFromPool(Random.Range(0, _platformGeneratorConfig.platformPrefabs.Count()));
                     platform.SetRandomSkin();
                     if (!platform.CorrectPlatformPlacePointInfo(ref platformPlacePointInfo))
                     {
@@ -114,6 +114,10 @@ namespace SCSIA
                     // place paltform
                     platform.transform.position = new Vector3(platformX, platformY, 0);
                     platform.Stage = nextStage;
+                    // create bonus
+                    int chance = Random.Range(0, 101);
+                    if (chance <= _platformGeneratorConfig.chanceSpawnBonusOnPlatform)
+                        platform.SetRandomBonus();
                     platform.gameObject.SetActive(true);
                     platformGroup.Add(platform);
                 }

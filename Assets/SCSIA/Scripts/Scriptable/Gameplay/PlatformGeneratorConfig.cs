@@ -1,4 +1,4 @@
-﻿using SCSIA;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace SCSIA
@@ -7,7 +7,7 @@ namespace SCSIA
     public class PlatformGeneratorConfig : ScriptableObject
     {
         [Header("Available platform array")]
-        public BasePlatform[] platformPrefabs;
+        public List<BasePlatform> platformPrefabs;
 
         [Header("Config")]
         public int maxStage = 20;
@@ -21,6 +21,9 @@ namespace SCSIA
         [Range(0, 100)] public int chanceSpawnMoveablePlatform = 30;
 
         [Header("Chance spawn bonus on platform")]
-        [Range(0, 100)] public int chanceSpawnBonusonPlatform = 50;
+        [Range(0, 100)] public int chanceSpawnBonusOnPlatform = 25;
+
+        [Header("Chance spawn emeny on platform")]
+        [Range(0, 100)] public int chanceSpawnEnemyOnPlatform = 25;
     }
 }

@@ -12,6 +12,7 @@ namespace SCSIA
         [SerializeField] private Animator _playerAnimator;
         [SerializeField] private float _playerJumpfForce;
         [SerializeField] private float _playerRunSpeed;
+        [SerializeField] private BonusConfig _bonusConfig;
 
         private InputSystem _inputSystem;
         private Vector3 _playerLeftTurn;
@@ -101,6 +102,16 @@ namespace SCSIA
             {
                 _platformRigidbody = null;
                 platform.OnPlayerExit();
+            }
+        }
+
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            IBonusCollision bonus = collision.gameObject.GetComponentInParent<IBonusCollision>();
+            if(bonus != null)
+            {
+                Debug.Log($"Player got bonus: type {bonus.GetBonusType()} points {_bonusConfig.GetPointsByBonus(bonus.GetBonusType())}");
+                bonus.OnPlayerEnter();
             }
         }
 

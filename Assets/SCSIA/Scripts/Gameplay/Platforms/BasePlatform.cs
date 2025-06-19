@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 
 namespace SCSIA
 {
@@ -7,8 +8,10 @@ namespace SCSIA
         //############################################################################################
         // FIELDS
         //############################################################################################
+        [Header("Platform config")]
+        [SerializeField] protected PlatformConfig platformConfig;
+
         [Header("Platform renderer")]
-        [SerializeField] protected PlatformRendererConfig platformRendererConfig;
         [SerializeField] protected Transform _platformRendererSpawnPoint;
 
         [Header("Platform bonus")]
@@ -36,17 +39,24 @@ namespace SCSIA
         //############################################################################################
         public void SetRandomSkin()
         {
-            int platformRendererType = Random.Range(0, platformRendererConfig._platformRendererPrefabs.Length);
+            CleanPlatform();
+            int platformRendererType = Random.Range(0, platformConfig._platformRendererPrefabs.Count());
             if (_platformRendererType != platformRendererType)
             {
                 // destroy old skin
                 foreach (Transform child in _platformRendererSpawnPoint)
                     Destroy(child.gameObject);
                 // create new skin
-                Instantiate(platformRendererConfig._platformRendererPrefabs[platformRendererType], _platformRendererSpawnPoint.position, Quaternion.identity, _platformRendererSpawnPoint);
+                Instantiate(platformConfig._platformRendererPrefabs[platformRendererType], _platformRendererSpawnPoint.position, Quaternion.identity, _platformRendererSpawnPoint);
                 _platformRendererWidth = _platformRendererSpawnPoint.GetComponentInChildren<SpriteRenderer>().bounds.size.x;
                 _platformRendererType = platformRendererType;
-            }
+            }  
+        }
+
+        public void SetRandomBonus()
+        {
+            int platformBonusType = Random.Range(0, platformConfig._platformBonusPrefabs.Count());
+            Instantiate(platformConfig._platformBonusPrefabs[platformBonusType], _platformBonusSpawnPoint.position, Quaternion.identity, _platformBonusSpawnPoint);
         }
 
         public virtual bool CorrectPlatformPlacePointInfo(ref PlatformPlacePointInfo platformPlacePointInfo)
@@ -77,6 +87,27 @@ namespace SCSIA
         protected virtual void Awake()
         {
             _platformRendererType = -1;
+        }
+
+        protected virtual void CleanPlatform()
+        {
+            DropBonus();
+            DropEnemy();
+        }
+
+        private void DropBonus()
+        {
+            // destroy old bonus
+            foreach (Transform child in _platformBonusSpawnPoint)
+                Destroy(child.gameObject);
+
+        }
+
+        private void DropEnemy()
+        {
+            // destroy old bonus
+            foreach (Transform child in _platformEnemySpawnPoint)
+                Destroy(child.gameObject);
         }
 
         //############################################################################################

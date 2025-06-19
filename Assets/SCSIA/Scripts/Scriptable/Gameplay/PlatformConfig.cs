@@ -1,17 +1,18 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace SCSIA
 {
     [CreateAssetMenu(fileName = "PlatformConfig", menuName = "Scriptable Objects/PlatformConfig")]
-    public class PlatformRendererConfig : ScriptableObject
+    public class PlatformConfig : ScriptableObject
     {
         [Header("Platform renderer prefabs")]
-        [SerializeField] public GameObject[] _platformRendererPrefabs;
+        [SerializeField] public List<GameObject> _platformRendererPrefabs;
 
         [Header("Platform bonus prefabs")]
-        [SerializeField] public GameObject[] _platformBonusPrefabs;
+        [SerializeField] public List<GameObject> _platformBonusPrefabs;
 
         [Header("Platform enemy prefabs")]
-        [SerializeField] public GameObject[] _platformEnemyPrefabs;
+        [SerializeField] public List<GameObject> _platformEnemyPrefabs;
     }
 }

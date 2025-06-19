@@ -13,12 +13,9 @@ namespace SCSIA
 
         [Space]
         [Header("Follow Axis")]
-        [SerializeField] private bool _x;
-        [SerializeField] private float _minX, _maxX;
-        [SerializeField] private bool _y;
-        [SerializeField] private float _minY, _maxY;
-        [SerializeField] private bool _z;
-        [SerializeField] private float _minZ, _maxZ;
+        [SerializeField] private FollowCameraAxis _x;
+        [SerializeField] private FollowCameraAxis _y;
+        [SerializeField] private FollowCameraAxis _z;
 
         //############################################################################################
         // PRIVATE METHODS
@@ -38,11 +35,19 @@ namespace SCSIA
         private Vector3 GetFollowTargetPosition()
         {
             var followTargetPosition = new Vector3(
-                _x ? Mathf.Clamp(_followTarget.position.x, _minX, _maxX) : transform.position.x,
-                _y ? Mathf.Clamp(_followTarget.position.y, _minY, _maxY) : transform.position.y,
-                _z ? Mathf.Clamp(_followTarget.position.z, _minZ, _maxZ) : transform.position.z
+                _x.follow ? Mathf.Clamp(_followTarget.position.x, _x.minV, _x.maxV) : transform.position.x,
+                _y.follow ? Mathf.Clamp(_followTarget.position.y, _y.minV, _y.maxV) : transform.position.y,
+                _z.follow ? Mathf.Clamp(_followTarget.position.z, _z.minV, _z.maxV) : transform.position.z
             );
             return followTargetPosition;
         }
+    }
+
+    [System.Serializable]
+    public class FollowCameraAxis
+    {
+        public bool follow;
+        public float minV;
+        public float maxV;
     }
 }

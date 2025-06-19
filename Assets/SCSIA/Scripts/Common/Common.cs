@@ -29,4 +29,10 @@ namespace SCSIA
             this.width = maxX - minX;
         }
     }
+
+    public enum EBonusType
+    {
+        Apple,
+        Banana
+    }
 }
