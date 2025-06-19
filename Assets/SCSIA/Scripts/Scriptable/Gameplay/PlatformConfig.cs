@@ -2,7 +2,7 @@
 
 namespace SCSIA
 {
-    [CreateAssetMenu(fileName = "PlatformRendererConfig", menuName = "Scriptable Objects/PlatformRendererConfig")]
+    [CreateAssetMenu(fileName = "PlatformConfig", menuName = "Scriptable Objects/PlatformConfig")]
     public class PlatformRendererConfig : ScriptableObject
     {
         [Header("Platform renderer prefabs")]
@@ -10,5 +10,8 @@ namespace SCSIA
 
         [Header("Platform bonus prefabs")]
         [SerializeField] public GameObject[] _platformBonusPrefabs;
+
+        [Header("Platform enemy prefabs")]
+        [SerializeField] public GameObject[] _platformEnemyPrefabs;
     }
 }
