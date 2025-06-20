@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace SCSIA
@@ -18,6 +19,9 @@ namespace SCSIA
 
         [Header("Platform properties")]
         [SerializeField] protected Rigidbody2D _platformRigidbody;
+
+        [Header("Platform effects")]
+        [SerializeField] protected List<BaseRendererEffectAction> _effectActionsOnPlayerCollisions;
 
         protected int _platformRendererType;
         protected float _platformRendererWidth;
@@ -66,7 +70,7 @@ namespace SCSIA
             platformPlacePointInfo.Set(platformPlacePointInfo.minX + _platformRendererWidth / 2f, platformPlacePointInfo.maxX - _platformRendererWidth / 2f);
             _platformPlacePointInfo = platformPlacePointInfo;
             _platformPlacePointInfo.Set(_platformPlacePointInfo.minX - _platformRendererWidth / 2f, _platformPlacePointInfo.maxX + _platformRendererWidth / 2f);
-            return platformPlacePointInfo.width > _platformRendererWidth;           
+            return platformPlacePointInfo.width >= _platformRendererWidth;           
         }
 
         public virtual PlatformPlacePointInfo GetPlatformPlacePointInfo()
@@ -74,6 +78,18 @@ namespace SCSIA
             return new PlatformPlacePointInfo(this.gameObject.transform.position.x - _platformRendererWidth / 2f, this.gameObject.transform.position.x + _platformRendererWidth / 2f, _platformRendererWidth);
         }
 
+        public void OnPlayerEnter()
+        {
+            foreach (var action in _effectActionsOnPlayerCollisions)
+                action.StartExecute(_platformRendererSpawnPoint.GetComponentInChildren<SpriteRenderer>());
+        }
+
+        public void OnPlayerExit()
+        {
+            foreach (var action in _effectActionsOnPlayerCollisions)
+                action.StopExecute();
+        }
+        
         public Rigidbody2D GetRigidbody()
         {
             return _platformRigidbody;

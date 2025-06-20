@@ -23,4 +23,4 @@ MonoBehaviour:
   _maxPlatformsByStage: 5
   _chanceSpawnBonusOnPlatform: 25
   _chanceSpawnEnemyOnPlatform: 25
-  _chanceSpawnNothingOnPlatform: 25
+  _chanceSpawnNothingOnPlatform: 50

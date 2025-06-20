@@ -59,6 +59,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8771966608048072425, guid: f980318fbbcb8024d80d9ff511240a2d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 138981460369771774}
+    - targetCorrespondingSourceObject: {fileID: 8771966608048072425, guid: f980318fbbcb8024d80d9ff511240a2d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -6605328864606136417}
   m_SourcePrefab: {fileID: 100100000, guid: f980318fbbcb8024d80d9ff511240a2d, type: 3}
 --- !u!1 &1240383052213199387 stripped
 GameObject:
@@ -82,6 +85,23 @@ MonoBehaviour:
   _platformBonusSpawnPoint: {fileID: 3490965043516052360}
   _platformEnemySpawnPoint: {fileID: 3813883454471830399}
   _platformRigidbody: {fileID: 1432662668768329460}
+  _effectActionsOnPlayerCollisions:
+  - {fileID: -6605328864606136417}
+--- !u!114 &-6605328864606136417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1240383052213199387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0727878b2b906234fac6556108f5c385, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _colorA: {r: 1, g: 1, b: 1, a: 1}
+  _colorB: {r: 0, g: 1, b: 0, a: 1}
+  _colorPulseSpeed: 2
 --- !u!50 &1432662668768329460 stripped
 Rigidbody2D:
   m_CorrespondingSourceObject: {fileID: 8893245785151912454, guid: f980318fbbcb8024d80d9ff511240a2d, type: 3}

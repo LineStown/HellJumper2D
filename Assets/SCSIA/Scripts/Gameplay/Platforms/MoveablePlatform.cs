@@ -32,7 +32,7 @@ namespace SCSIA
             _platformPlacePointInfo.Set(_platformPlacePointInfo.minX - _platformRendererWidth / 2f, _platformPlacePointInfo.maxX + _platformRendererWidth / 2f);
             _speed = Random.Range(PlatformConfig.MinSpeed, PlatformConfig.MaxSpeed);
             _direction = Random.Range(0, 2) * 2 - 1;
-            return platformPlacePointInfo.width > _platformRendererWidth;
+            return platformPlacePointInfo.width >= _platformRendererWidth; 
         }
 
         public override PlatformPlacePointInfo GetPlatformPlacePointInfo()

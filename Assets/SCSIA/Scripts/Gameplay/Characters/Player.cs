@@ -87,6 +87,7 @@ namespace SCSIA
                     if (contact.normal.y > 0.5f)
                     {
                         _platformRigidbody = platform.GetRigidbody();
+                        platform.OnPlayerEnter();
                         break;
                     }
         }
@@ -100,6 +101,7 @@ namespace SCSIA
             if (platform != null && _platformRigidbody == platform.GetRigidbody())
             {
                 _platformRigidbody = null;
+                platform.OnPlayerExit();
             }
         }
 
