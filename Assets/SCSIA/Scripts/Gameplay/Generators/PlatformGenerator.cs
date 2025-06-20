@@ -103,6 +103,10 @@ namespace SCSIA
                     platform.SetRandomSkin();
                     if (!platform.CorrectPlatformPlacePointInfo(ref platformPlacePointInfo))
                     {
+                        if(platformGroup.Count() == 0)
+                        {
+                                Debug.Log("sdsd");
+                        }
                         ReturnPlatformToPool(platform);
                         break;
                     }

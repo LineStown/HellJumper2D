@@ -11,6 +11,7 @@ namespace SCSIA
         private float _maxX;
         private float _speed;
         private int _direction;
+        private PlatformPlacePointInfo _platformPlacePointInfo;
 
         //############################################################################################
         // PROPERTIES
@@ -22,14 +23,13 @@ namespace SCSIA
         //############################################################################################
         public override bool CorrectPlatformPlacePointInfo(ref PlatformPlacePointInfo platformPlacePointInfo)
         {
-            platformPlacePointInfo.Set(platformPlacePointInfo.minX + _platformRendererWidth / 2f, platformPlacePointInfo.maxX - _platformRendererWidth / 2f);
-            float minX = Random.Range(_platformRendererWidth / 4f, platformPlacePointInfo.width - _platformRendererWidth);
-            float maxX = Random.Range(minX + _platformRendererWidth, platformPlacePointInfo.width - _platformRendererWidth / 4f);
+            platformPlacePointInfo.Set(platformPlacePointInfo.minX + _platformMD, platformPlacePointInfo.maxX - _platformMD);
+            float minX = Random.Range(0, platformPlacePointInfo.width - _platformRendererWidth);
+            float maxX = Random.Range(minX + _platformRendererWidth, platformPlacePointInfo.width);
             platformPlacePointInfo.Set(platformPlacePointInfo.minX + minX, platformPlacePointInfo.minX + maxX);
-            _platformPlacePointInfo = platformPlacePointInfo;
-            _minX = _platformPlacePointInfo.minX;
-            _maxX = _platformPlacePointInfo.maxX;
-            _platformPlacePointInfo.Set(_platformPlacePointInfo.minX - _platformRendererWidth / 2f, _platformPlacePointInfo.maxX + _platformRendererWidth / 2f);
+            _minX = platformPlacePointInfo.minX;
+            _maxX = platformPlacePointInfo.maxX;
+            _platformPlacePointInfo.Set(platformPlacePointInfo.minX - _platformMD, platformPlacePointInfo.maxX + _platformMD);
             _speed = Random.Range(PlatformConfig.MinSpeed, PlatformConfig.MaxSpeed);
             _direction = Random.Range(0, 2) * 2 - 1;
             return platformPlacePointInfo.width >= _platformRendererWidth; 

@@ -25,8 +25,8 @@ namespace SCSIA
 
         protected int _platformRendererType;
         protected float _platformRendererWidth;
-
-        protected PlatformPlacePointInfo _platformPlacePointInfo;
+        protected float _platformMD;
+        protected const float _widthBetween = 0.1f; 
 
         //############################################################################################
         // PROPERTIES
@@ -49,6 +49,8 @@ namespace SCSIA
                 // create new skin
                 Instantiate(_platformConfig.PlatformRendererPrefabs[platformRendererType], _platformRendererSpawnPoint.position, Quaternion.identity, _platformRendererSpawnPoint);
                 _platformRendererWidth = _platformRendererSpawnPoint.GetComponentInChildren<SpriteRenderer>().bounds.size.x;
+                _platformMD = _platformRendererWidth * (0.5f + _widthBetween);
+
                 _platformRendererType = platformRendererType;
             }
         }
@@ -67,10 +69,12 @@ namespace SCSIA
 
         public virtual bool CorrectPlatformPlacePointInfo(ref PlatformPlacePointInfo platformPlacePointInfo)
         {
-            platformPlacePointInfo.Set(platformPlacePointInfo.minX + _platformRendererWidth / 2f, platformPlacePointInfo.maxX - _platformRendererWidth / 2f);
-            _platformPlacePointInfo = platformPlacePointInfo;
-            _platformPlacePointInfo.Set(_platformPlacePointInfo.minX - _platformRendererWidth / 2f, _platformPlacePointInfo.maxX + _platformRendererWidth / 2f);
-            return platformPlacePointInfo.width >= _platformRendererWidth;           
+            platformPlacePointInfo.Set(platformPlacePointInfo.minX + _platformMD, platformPlacePointInfo.maxX - _platformMD);
+            if(platformPlacePointInfo.width < _platformRendererWidth)
+            {
+                Debug.Log(0);
+            }
+            return platformPlacePointInfo.width > 0;       
         }
 
         public virtual PlatformPlacePointInfo GetPlatformPlacePointInfo()

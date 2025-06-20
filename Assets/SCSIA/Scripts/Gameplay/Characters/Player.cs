@@ -73,6 +73,10 @@ namespace SCSIA
                 _playerJump = false;
             }
 
+            // falling
+            if (_playerRigitbody.linearVelocityY < -10f)
+                _playerRigitbody.linearVelocityY = -10f;
+
             _playerAnimator.SetBool("Jump", !_platformRigidbody);
         }
 
