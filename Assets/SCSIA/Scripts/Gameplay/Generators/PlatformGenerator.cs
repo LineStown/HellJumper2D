@@ -31,6 +31,16 @@ namespace SCSIA
         //############################################################################################
         private void Awake()
         {
+            Initialization();
+        }
+
+        private void FixedUpdate()
+        {
+            UpdateOnlinePlatformList();
+        }
+
+        private void Initialization()
+        {
             // current player stage (bottom platform)
             _playerStage = 0;
             // get screen size
@@ -42,11 +52,6 @@ namespace SCSIA
                 _platformPool.Add(new Queue<BasePlatform>());
             _platformOnline = new List<List<BasePlatform>>();
             // update online platform list
-            UpdateOnlinePlatformList();
-        }
-
-        private void FixedUpdate()
-        {
             UpdateOnlinePlatformList();
         }
 

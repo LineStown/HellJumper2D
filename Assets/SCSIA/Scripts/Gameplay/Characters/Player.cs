@@ -29,32 +29,17 @@ namespace SCSIA
         //############################################################################################
         private void Awake()
         {
-            // input system
-            _inputSystem = new InputSystem();
-            // direction
-            _playerLeftTurn = new Vector3(-_playerRigitbody.transform.localScale.x, _playerRigitbody.transform.localScale.y, _playerRigitbody.transform.localScale.z);
-            _playerRightTurn = new Vector3(_playerRigitbody.transform.localScale.x, _playerRigitbody.transform.localScale.y, _playerRigitbody.transform.localScale.z);
-            // jump
-            _playerJump = false;
-            // get screen size
-            _screenMinX = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, 0)).x;
-            _screenMaxX = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, 0, 0)).x;
+            Initialization();
         }
 
         private void OnEnable()
         {
-            _inputSystem.Player.Enable();
-            _inputSystem.Player.Move.performed += OnMove;
-            _inputSystem.Player.Move.canceled += OnMove;
-            _inputSystem.Player.Jump.performed += OnJump;
+            SubscribeEvents();
         }
 
         private void OnDisable()
         {
-            _inputSystem.Player.Move.performed -= OnMove;
-            _inputSystem.Player.Move.canceled -= OnMove;
-            _inputSystem.Player.Jump.performed -= OnJump;
-            _inputSystem.Player.Disable();
+            UnsubscribeEvents();
         }
 
         private void FixedUpdate()
@@ -117,6 +102,36 @@ namespace SCSIA
                 Debug.Log($"Player got bonus: type {bonus.GetBonusType()} points {_pointBonusConfig.GetPointsByBonus(bonus.GetBonusType())}");
                 bonus.OnPlayerEnter();
             }
+        }
+
+        private void Initialization()
+        {
+            // input system
+            _inputSystem = new InputSystem();
+            // direction
+            _playerLeftTurn = new Vector3(-_playerRigitbody.transform.localScale.x, _playerRigitbody.transform.localScale.y, _playerRigitbody.transform.localScale.z);
+            _playerRightTurn = new Vector3(_playerRigitbody.transform.localScale.x, _playerRigitbody.transform.localScale.y, _playerRigitbody.transform.localScale.z);
+            // jump
+            _playerJump = false;
+            // get screen size
+            _screenMinX = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, 0)).x;
+            _screenMaxX = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, 0, 0)).x;
+        }
+
+        private void SubscribeEvents()
+        {
+            _inputSystem.Player.Enable();
+            _inputSystem.Player.Move.performed += OnMove;
+            _inputSystem.Player.Move.canceled += OnMove;
+            _inputSystem.Player.Jump.performed += OnJump;
+        }
+
+        private void UnsubscribeEvents()
+        {
+            _inputSystem.Player.Move.performed -= OnMove;
+            _inputSystem.Player.Move.canceled -= OnMove;
+            _inputSystem.Player.Jump.performed -= OnJump;
+            _inputSystem.Player.Disable();
         }
 
         private void OnMove(InputAction.CallbackContext context)

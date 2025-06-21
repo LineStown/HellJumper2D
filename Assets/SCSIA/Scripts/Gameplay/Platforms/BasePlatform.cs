@@ -104,12 +104,17 @@ namespace SCSIA
         //############################################################################################
         protected virtual void Awake()
         {
-            _platformRendererType = -1;
+            Initialization();
         }
 
         //############################################################################################
         // PRIVATE METHODS
         //############################################################################################
+        private void Initialization()
+        {
+            _platformRendererType = -1;
+        }
+
         private void ClearPlatform()
         {
             DropBonus();

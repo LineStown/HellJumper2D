@@ -4,10 +4,16 @@ namespace SCSIA
 {
     public struct PlatformPlacePointInfo
     {
+        //############################################################################################
+        // FIELDS
+        //############################################################################################
         public float minX;
         public float maxX;
         public float width;
 
+        //############################################################################################
+        // PUBLIC  METHODS
+        //############################################################################################
         public PlatformPlacePointInfo(float minX, float maxX, float width)
         {
             this.minX = minX;

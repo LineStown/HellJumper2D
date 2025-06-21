@@ -30,7 +30,7 @@ namespace SCSIA
         {
             _bonusPoints = new Dictionary<EBonusType, int>();
             foreach (BonusPoints value in _inputBonusPoints)
-                _bonusPoints[value.bonusType] = value.bonuPpoints;
+                _bonusPoints[value.bonusType] = value.bonusPoints;
         }
     }
 
@@ -38,6 +38,6 @@ namespace SCSIA
     public class BonusPoints
     {
         public EBonusType bonusType;
-        public int bonuPpoints;
+        public int bonusPoints;
     }
 }
