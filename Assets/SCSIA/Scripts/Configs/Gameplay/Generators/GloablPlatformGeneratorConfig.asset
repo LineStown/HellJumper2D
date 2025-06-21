@@ -19,7 +19,7 @@ MonoBehaviour:
   _maxSpawnByDirection: 5
   _platformY: 3
   _platformYDiff: 0.25
-  _minPlatformsByStage: 1
+  _minPlatformsByStage: 2
   _maxPlatformsByStage: 5
   _chanceSpawnBonusOnPlatform: 25
   _chanceSpawnEnemyOnPlatform: 25

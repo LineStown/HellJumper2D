@@ -103,12 +103,11 @@ namespace SCSIA
                     platform.SetRandomSkin();
                     if (!platform.CorrectPlatformPlacePointInfo(ref platformPlacePointInfo))
                     {
-                        if(platformGroup.Count() == 0)
-                        {
-                                Debug.Log("sdsd");
-                        }
                         ReturnPlatformToPool(platform);
-                        break;
+                        if (platformGroup.Count() == 0)
+                            continue;
+                        else
+                            break;
                     }
                     // generate platform X
                     float platformX = Random.Range(platformPlacePointInfo.minX, platformPlacePointInfo.maxX);
