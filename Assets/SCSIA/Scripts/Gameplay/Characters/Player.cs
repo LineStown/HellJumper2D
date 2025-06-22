@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace SCSIA
@@ -10,9 +11,11 @@ namespace SCSIA
         //############################################################################################
         [SerializeField] private Rigidbody2D _playerRigitbody;
         [SerializeField] private Animator _playerAnimator;
+        [SerializeField] private SpriteRenderer _playerSpriteRenderer;
         [SerializeField] private float _playerJumpfForce;
         [SerializeField] private float _playerRunSpeed;
         [SerializeField] private PointBonusConfig _pointBonusConfig;
+        [SerializeField] private float _playerNoJumpTime = 2f;
 
         [Header("Audio")]
         [SerializeField] private AudioSource _audioSource;
@@ -25,6 +28,7 @@ namespace SCSIA
         private Vector3 _playerRightTurn;
         private Vector2 _playerMove;
         private bool _playerJump;
+        private bool _playerNoJump;
         private Rigidbody2D _platformRigidbody;
         
         private float _screenMinX;
@@ -50,9 +54,6 @@ namespace SCSIA
 
         private void FixedUpdate()
         {
-            // run
-            _playerRigitbody.linearVelocityX = _playerMove.x * _playerRunSpeed + ((_platformRigidbody) ? _platformRigidbody.linearVelocityX : 0);
-
             // left <> right
             if (_playerRigitbody.position.x < _screenMinX || _playerRigitbody.position.x > _screenMaxX)
                 _playerRigitbody.position = new Vector2(_playerRigitbody.position.x * -0.99f, _playerRigitbody.position.y);
@@ -68,6 +69,9 @@ namespace SCSIA
             // falling
             if (_playerRigitbody.linearVelocityY < -10f)
                 _playerRigitbody.linearVelocityY = -10f;
+
+            // run
+            _playerRigitbody.linearVelocityX = _playerMove.x * _playerRunSpeed + ((_platformRigidbody) ? _platformRigidbody.linearVelocityX : 0);
 
             _playerAnimator.SetBool("Jump", !_platformRigidbody);
         }
@@ -112,6 +116,9 @@ namespace SCSIA
                 bonus.OnPlayerEnter();
                 _audioSource.PlayOneShot(_audioBonus);
             }
+            IEnemyCollision enemy = collision.gameObject.GetComponentInParent<IEnemyCollision>();
+            if(enemy != null && !_playerNoJump)
+                StartCoroutine(PlayerNoJump(_playerNoJumpTime));
         }
 
         private void Initialization()
@@ -123,6 +130,7 @@ namespace SCSIA
             _playerRightTurn = new Vector3(_playerRigitbody.transform.localScale.x, _playerRigitbody.transform.localScale.y, _playerRigitbody.transform.localScale.z);
             // jump
             _playerJump = false;
+            _playerNoJump = false;
             // get screen size
             _screenMinX = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, 0)).x;
             _screenMaxX = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, 0, 0)).x;
@@ -157,8 +165,18 @@ namespace SCSIA
 
         private void OnJump(InputAction.CallbackContext context)
         {
-            if (_platformRigidbody && !_playerJump)
+            if (_platformRigidbody && !_playerJump && !_playerNoJump)
                 _playerJump = true;
+        }
+
+        private IEnumerator PlayerNoJump(float seconds)
+        {
+            _playerNoJump = true;
+            //Color oldColor= _playerSpriteRenderer.color;
+            _playerSpriteRenderer.color = Color.red;
+            yield return new WaitForSeconds(seconds);
+            _playerNoJump = false;
+            _playerSpriteRenderer.color = Color.white;
         }
     }
 }

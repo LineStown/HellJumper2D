@@ -1120,9 +1120,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerRigitbody: {fileID: 784902468}
   _playerAnimator: {fileID: 784902469}
+  _playerSpriteRenderer: {fileID: 784902470}
   _playerJumpfForce: 8
   _playerRunSpeed: 6
   _pointBonusConfig: {fileID: 11400000, guid: c6cc8b718ef952549ab06462f0192d02, type: 2}
+  _playerNoJumpTime: 2
   _audioSource: {fileID: 784902473}
   _audioJumpOn: {fileID: 8300000, guid: aa919bac59bd9fd428e38fd723951b73, type: 3}
   _audioJumpOff: {fileID: 8300000, guid: 075582c6d70f34e42a978e4fabaedc3e, type: 3}
