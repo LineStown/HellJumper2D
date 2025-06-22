@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ce096c95e2cf2d47ac315680080e0a1, type: 3}
+  m_Name: MoveablePlatformConfig
+  m_EditorClassIdentifier: 
+  _platformRendererPrefabs:
+  - {fileID: 1426263815843110373, guid: 6e577bf2eace16d41a78ad14a07a72b0, type: 3}
+  - {fileID: 7302340837086594700, guid: 24c2b43e388247f4bb8c626bd1d6b245, type: 3}
+  - {fileID: 2529279047928658681, guid: c388ab709c0eb424194e2cebdf2e8f36, type: 3}
+  - {fileID: 4801024671251998745, guid: 354f6ae516b70814ba8f86e31788ef25, type: 3}
+  - {fileID: 3806418374834277393, guid: 2ecdf00dfd688e44faa3e5ee6febef50, type: 3}
+  _platformBonusPrefabs:
+  - {fileID: 5814825982082049867, guid: 03f10810742862f4aabd771ece3ad5e0, type: 3}
+  - {fileID: 7970659631028473915, guid: 3465931ecdcd31242959dbd4f509ee4c, type: 3}
+  - {fileID: 3650690605282303578, guid: f192ccd360aea5c47be30786d1fef933, type: 3}
+  - {fileID: 1705082077023736501, guid: 97e0953177d7ff142a749ca30c9c566e, type: 3}
+  _platformEnemyPrefabs:
+  - {fileID: 7521293759099786148, guid: bc36b66bc3f0a42409358579313925f4, type: 3}
+  _minSpeed: 2
+  _maxSpeed: 5
