@@ -10,7 +10,6 @@ namespace SCSIA
         // FIELDS
         //############################################################################################
         [SerializeField] private Button _newGameButton;
-        [SerializeField] private Button _leaderboardButton;
         [SerializeField] private Button _exitButton;
 
         //############################################################################################
@@ -29,25 +28,18 @@ namespace SCSIA
         private void SubscribeEvents()
         {
             _newGameButton.onClick.AddListener(OnNewGameButtonClick);
-            _leaderboardButton.onClick.AddListener(OnLeaderboardButtonClick);
             _exitButton.onClick.AddListener(OnExitButtonClick);
         }
 
         private void UnsubscribeEvents()
         {
             _newGameButton.onClick.RemoveListener(OnNewGameButtonClick);
-            _leaderboardButton.onClick.RemoveListener(OnLeaderboardButtonClick);
             _exitButton.onClick.RemoveListener(OnExitButtonClick);
         }
 
         private void OnNewGameButtonClick()
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        }
-
-        private void OnLeaderboardButtonClick()
-        {
-
         }
 
         private void OnExitButtonClick()

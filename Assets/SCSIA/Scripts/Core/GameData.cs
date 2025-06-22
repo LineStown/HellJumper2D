@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 namespace SCSIA
 {
@@ -15,6 +17,9 @@ namespace SCSIA
         private static int _score = 0;
         private static int _stage = 0;
         private static int _timer = 0;
+        private static int _bestScore = 0;
+
+        private static readonly String _recordName = "BestScore";
 
         //############################################################################################
         // PUBLIC  METHODS
@@ -49,6 +54,14 @@ namespace SCSIA
             TimerAction -= callback;
         }
 
+        public static void Initialization(int timerValue)
+        {
+            _score = 0;
+            _stage = 0;
+            _timer = timerValue;
+            _bestScore = (PlayerPrefs.HasKey(_recordName)) ? PlayerPrefs.GetInt(_recordName) : 0;
+        }
+
         public static void SetScore(int value)
         {
             _score = value;
@@ -66,6 +79,20 @@ namespace SCSIA
             return _score;
         }
 
+        public static int GetBestScore()
+        {
+            if (PlayerPrefs.HasKey("BestScore"))
+                _bestScore = PlayerPrefs.GetInt("BestScore");
+            return _bestScore;
+        }
+
+        public static void SaveScore()
+        {
+            if (_score > _bestScore)
+                PlayerPrefs.SetInt(_recordName, _score);
+            PlayerPrefs.Save();
+        }
+
         public static void SetStage(int value)
         {
             _stage = value;
@@ -76,6 +103,11 @@ namespace SCSIA
         {
             _timer = value;
             TimerAction?.Invoke(_timer);
+        }
+
+        public static int GetTimer()
+        {
+            return _timer;
         }
     }
 }

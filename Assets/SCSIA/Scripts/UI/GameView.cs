@@ -1,5 +1,4 @@
-﻿using System;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,12 +20,18 @@ namespace SCSIA
         //############################################################################################
         private void OnEnable()
         {
+            UpdateTimerText();
             SubscribeEvents();
         }
 
         private void OnDisable()
         {
             UnsubscribeEvents();
+        }
+
+        private void UpdateTimerText()
+        {
+            _timerText.text = GameData.GetTimer().ToString();
         }
 
         private void SubscribeEvents()

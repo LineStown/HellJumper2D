@@ -1,37 +1,16 @@
 fileFormatVersion: 2
-guid: 3148594d1dd066940b625ca02d90853b
+guid: eecb8f76d2942224eabad5ba83cffbca
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6893308443034365055
-    second: text_0
+      213: -3069333870336326077
+    second: GameViewText_0
   - first:
-      213: 3758864503456084200
-    second: text_1
+      213: -8180826020881971124
+    second: GameViewText_1
   - first:
-      213: 2353359508387441526
-    second: text_2
-  - first:
-      213: -3305755913416243787
-    second: text_3
-  - first:
-      213: 4262428847473830299
-    second: text_4
-  - first:
-      213: 2374660112946386251
-    second: text_5
-  - first:
-      213: -3060634333191292885
-    second: text_6
-  - first:
-      213: -5192940493235497792
-    second: text_7
-  - first:
-      213: 5678346716304347415
-    second: text_8
-  - first:
-      213: 4030190716506022471
-    second: text_9
+      213: 8243363427421556724
+    second: GameViewText_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -153,67 +132,67 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: text_0
+      name: GameViewText_0
       rect:
         serializedVersion: 2
-        x: 356
-        y: 674
-        width: 811
-        height: 317
+        x: 358
+        y: 675
+        width: 804
+        height: 320
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7e1de778884915d49b58a57bf4673918
-      internalID: -1441513959
+      spriteID: b2fb147f265bb704285199e72cf35450
+      internalID: -1614261715
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: text_1
+      name: GameViewText_1
       rect:
         serializedVersion: 2
         x: 374
-        y: 370
-        width: 782
-        height: 302
+        y: 368
+        width: 780
+        height: 303
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5efc8a92025c6a74cb5458347ac8b55c
-      internalID: -2039973798
+      spriteID: e7203b3a7297ca448a2ee532d6a14e48
+      internalID: -958253876
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: text_2
+      name: GameViewText_2
       rect:
         serializedVersion: 2
-        x: 401
+        x: 404
         y: 62
-        width: 778
-        height: 294
+        width: 774
+        height: 295
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 63e92e1c6f1147743b4b8fd5eb338140
-      internalID: 350208865
+      spriteID: b9cb4ac7d291bd14c8650b1431291459
+      internalID: -74525283
       vertices: []
       indices: 
       edges: []
@@ -222,7 +201,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 0995c585bbd4dc347bfce989787f54a6
+    spriteID: e2e61f1f9c5fa7241a64a8fb13bb367b
     internalID: 0
     vertices: []
     indices: 
@@ -232,10 +211,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      text_0: -1441513959
-      text_1: -2039973798
-      text_2: 350208865
-      text_3: -699659645
+      GameViewText_0: -1614261715
+      GameViewText_1: -958253876
+      GameViewText_2: -74525283
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -16,7 +16,8 @@ namespace SCSIA
         [SerializeField] private Button _exitButton;
 
         [Header("Score")]
-        [SerializeField] private TextMeshProUGUI _score;
+        [SerializeField] private TextMeshProUGUI _bestScore;
+        [SerializeField] private TextMeshProUGUI _yourScore;
 
         //############################################################################################
         // PUBLIC  METHODS
@@ -61,7 +62,8 @@ namespace SCSIA
 
         private void UpdateScore()
         {
-            _score.text = GameData.GetScore().ToString();
+            _bestScore.text = GameData.GetBestScore().ToString();
+            _yourScore.text = GameData.GetScore().ToString();
         }
     }
 }

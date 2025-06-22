@@ -1,31 +1,31 @@
 fileFormatVersion: 2
-guid: 54a519d55de77494ea6dc004cbf44272
+guid: 7e94b870aa38ddb498af31096465ce02
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5066467293785092065
-    second: submenu_0
+      213: 5434490653426374451
+    second: SubMenuText_0
   - first:
-      213: -6802689001949566514
-    second: submenu_1
+      213: 2175881182552741741
+    second: SubMenuText_1
   - first:
-      213: -6409515513760887658
-    second: submenu_2
+      213: 8397453253321617271
+    second: SubMenuText_2
   - first:
-      213: -5295452174948136455
-    second: submenu_3
+      213: -560041838379089377
+    second: SubMenuText_3
   - first:
-      213: -1452972994423271281
-    second: submenu_4
+      213: -6290226077927030675
+    second: SubMenuText_4
   - first:
-      213: -714970794343792474
-    second: submenu_5
+      213: -6412031782878018633
+    second: SubMenuText_5
   - first:
-      213: -8113092099482240898
-    second: submenu_6
+      213: 6805033359406317550
+    second: SubMenuText_6
   - first:
-      213: 6630370575139716502
-    second: submenu_7
+      213: -5505906640006964442
+    second: SubMenuText_7
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -147,13 +147,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: submenu_0
+      name: SubMenuText_0
       rect:
         serializedVersion: 2
-        x: 230
-        y: 614
-        width: 1073
-        height: 358
+        x: 233
+        y: 606
+        width: 1064
+        height: 365
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -162,20 +162,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c7dfd20177b54d642a777b4d43874f33
-      internalID: -2103359347
+      spriteID: 0e3e05355b461704fa51d553771c564a
+      internalID: 10679185
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: submenu_1
+      name: SubMenuText_1
       rect:
         serializedVersion: 2
-        x: 259
-        y: 59
-        width: 1011
-        height: 502
+        x: 256
+        y: 58
+        width: 1013
+        height: 501
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -184,8 +184,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 88e62716a68228c469fa8bea3c3d7431
-      internalID: 975917919
+      spriteID: 44b1389f58882334cb86f2cb675e2d02
+      internalID: -1109663749
       vertices: []
       indices: 
       edges: []
@@ -194,7 +194,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 2f80fadcdd5f42941831dfea7be014dd
+    spriteID: 10073af51db51844d8a7f743b56827da
     internalID: 0
     vertices: []
     indices: 
@@ -204,8 +204,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      submenu_0: -2103359347
-      submenu_1: 975917919
+      SubMenuText_0: 10679185
+      SubMenuText_1: -1109663749
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

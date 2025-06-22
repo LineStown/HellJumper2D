@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 namespace SCSIA
 {
@@ -19,14 +20,14 @@ namespace SCSIA
         //############################################################################################
         // PRIVATE METHODS
         //############################################################################################
+        private void Awake()
+        {
+            Initialization();
+        }
+
         private void OnEnable()
         {
             StartLevel();
-        }
-
-        private void Start()
-        {
-            UpdateLevel();
         }
 
         private void OnDisable()
@@ -41,11 +42,9 @@ namespace SCSIA
             _levelTimerCoroutineId = StartCoroutine(LevelTimer());
         }
 
-        private void UpdateLevel()
+        private void Initialization()
         {
-            GameData.SetScore(0);
-            GameData.SetStage(0);
-            GameData.SetTimer(_levelGeneratorConfig.LevelTimer);
+            GameData.Initialization(_levelGeneratorConfig.LevelTimer);
         }
 
         private void StopLevel()
@@ -57,12 +56,11 @@ namespace SCSIA
         {
             do
             {
+                GameData.SetTimer(_levelTimer);
                 yield return new WaitForSeconds(1f);
                 _levelTimer--;
-                GameData.SetTimer(_levelTimer);
             }
-            while (_levelTimer > 0);
-            yield return new WaitForSeconds(1f);
+            while (_levelTimer >= 0);
             FinishLevel();
         }
 

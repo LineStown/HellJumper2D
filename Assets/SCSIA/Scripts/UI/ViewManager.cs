@@ -39,7 +39,8 @@ namespace SCSIA
                 foreach (GameObject obj in _stoppableObjects)
                     obj.SetActive(false);
                 _gameOverViewCanvas.gameObject.SetActive(true);
-                _gameViewCanvas.gameObject.SetActive(false); 
+                _gameViewCanvas.gameObject.SetActive(false);
+                GameData.SaveScore();
             }
         }
 

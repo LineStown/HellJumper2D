@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd27327659316a342b407943ab253f8e, type: 3}
   m_Name: GlobalLevelGeneratorConfig
   m_EditorClassIdentifier: 
-  _levelTimer: 60
+  _levelTimer: 30
