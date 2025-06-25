@@ -113,12 +113,16 @@ namespace SCSIA
             {
                 Debug.Log($"Player got bonus: type {bonus.GetBonusType()} points {_pointBonusConfig.GetPointsByBonus(bonus.GetBonusType())}");
                 GameData.AddScore(_pointBonusConfig.GetPointsByBonus(bonus.GetBonusType()));
+                GameData.AddLog("Player collected bonus " + _pointBonusConfig.GetPointsByBonus(bonus.GetBonusType()).ToString() + " point(s). Total score " + GameData.GetScore().ToString());
                 bonus.OnPlayerEnter();
                 _audioSource.PlayOneShot(_audioBonus);
             }
             IEnemyCollision enemy = collision.gameObject.GetComponentInParent<IEnemyCollision>();
-            if(enemy != null && !_playerNoJump)
+            if (enemy != null && !_playerNoJump)
+            {
+                GameData.AddLog("Player NoJump mode on");
                 StartCoroutine(PlayerNoJump(_playerNoJumpTime));
+            }
         }
 
         private void Initialization()
@@ -177,6 +181,7 @@ namespace SCSIA
             yield return new WaitForSeconds(seconds);
             _playerNoJump = false;
             _playerSpriteRenderer.color = Color.white;
+            GameData.AddLog("Player NoJump mode off");
         }
     }
 }

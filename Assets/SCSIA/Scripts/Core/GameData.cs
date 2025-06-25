@@ -19,7 +19,8 @@ namespace SCSIA
         private static int _timer = 0;
         private static int _bestScore = 0;
 
-        private static readonly String _recordName = "BestScore";
+        private static readonly string _recordName = "BestScore";
+        private static List<string> _log = new List<string>();
 
         //############################################################################################
         // PUBLIC  METHODS
@@ -60,6 +61,8 @@ namespace SCSIA
             _stage = 0;
             _timer = timerValue;
             _bestScore = (PlayerPrefs.HasKey(_recordName)) ? PlayerPrefs.GetInt(_recordName) : 0;
+            _log.Clear();
+            AddLog("Round started");
         }
 
         public static void SetScore(int value)
@@ -108,6 +111,16 @@ namespace SCSIA
         public static int GetTimer()
         {
             return _timer;
+        }
+
+        public static void AddLog(string value)
+        {
+            _log.Add(DateTime.Now + " : " + value);
+        }
+
+        public static List<string> GetLog()
+        { 
+            return _log;
         }
     }
 }

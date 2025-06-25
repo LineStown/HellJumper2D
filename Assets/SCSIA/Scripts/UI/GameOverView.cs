@@ -19,6 +19,9 @@ namespace SCSIA
         [SerializeField] private TextMeshProUGUI _bestScore;
         [SerializeField] private TextMeshProUGUI _yourScore;
 
+        [SerializeField] private GameObject _logSpawnPoint;
+        [SerializeField] private GameObject _logPrefab;
+
         //############################################################################################
         // PUBLIC  METHODS
         //############################################################################################
@@ -64,6 +67,13 @@ namespace SCSIA
         {
             _bestScore.text = GameData.GetBestScore().ToString();
             _yourScore.text = GameData.GetScore().ToString();
+
+            GameData.AddLog("Round finished");
+            foreach(string logRecord in GameData.GetLog())
+            {
+                var tmp = Instantiate(_logPrefab, Vector3.zero, Quaternion.identity, _logSpawnPoint.transform);
+                tmp.GetComponent<TextMeshProUGUI>().text = logRecord;
+            }
         }
     }
 }
