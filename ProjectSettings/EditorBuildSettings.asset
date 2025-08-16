@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/SCSIA/Scenes/BootstrapScene.unity
+    guid: 8f567680c3e96824480a42bf19cce88b
+  - enabled: 1
     path: Assets/SCSIA/Scenes/MainMenu.unity
     guid: bb77bcdc37ec25f4da0d184fa698d2ca
   - enabled: 1

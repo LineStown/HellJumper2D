@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace SCSIA
 {
-    [CreateAssetMenu(fileName = "LevelGeneratorConfig", menuName = "Scriptable Objects/LevelGeneratorConfig")]
+    [CreateAssetMenu(fileName = "LevelGeneratorConfig", menuName = "Scriptable Objects/Generator/LevelGeneratorConfig")]
     public class LevelGeneratorConfig : ScriptableObject
     {
         //############################################################################################

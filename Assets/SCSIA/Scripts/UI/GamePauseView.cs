@@ -53,7 +53,7 @@ namespace SCSIA
 
         private void OnExitButtonClick()
         {
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
         }
     }
 }

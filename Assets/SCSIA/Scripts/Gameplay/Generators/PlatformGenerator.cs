@@ -68,8 +68,8 @@ namespace SCSIA
             if (_playerStage != playerStage || _platformOnline.Count == 0)
             {
                 _playerStage = playerStage;
-                GameData.SetStage(playerStage);
-                GameData.AddLog("Player moved to " + playerStage.ToString() + " stage");
+                Bootstrap.GameDataManager.SetStage(playerStage);
+                Bootstrap.GameDataManager.AddLog("Player moved to " + playerStage.ToString() + " stage");
                 // calculate
                 int countPlatformsUp = (_platformOnline.Count == 0) ? 0 : _platformOnline.Last().First().Stage - _playerStage;
                 int countPlatformsDown = (_platformOnline.Count == 0) ? 0 : _playerStage - _platformOnline.First().First().Stage;

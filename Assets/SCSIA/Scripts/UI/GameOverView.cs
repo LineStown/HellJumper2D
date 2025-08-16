@@ -60,16 +60,16 @@ namespace SCSIA
 
         private void OnExitButtonClick()
         {
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
         }
 
         private void UpdateScore()
         {
-            _bestScore.text = GameData.GetBestScore().ToString();
-            _yourScore.text = GameData.GetScore().ToString();
+            _bestScore.text = Bootstrap.GameDataManager.GetBestScore().ToString();
+            _yourScore.text = Bootstrap.GameDataManager.GetScore().ToString();
 
-            GameData.AddLog("Round finished");
-            foreach(string logRecord in GameData.GetLog())
+            Bootstrap.GameDataManager.AddLog("Round finished");
+            foreach(string logRecord in Bootstrap.GameDataManager.GetLog())
             {
                 var tmp = Instantiate(_logPrefab, Vector3.zero, Quaternion.identity, _logSpawnPoint.transform);
                 tmp.GetComponent<TextMeshProUGUI>().text = logRecord;

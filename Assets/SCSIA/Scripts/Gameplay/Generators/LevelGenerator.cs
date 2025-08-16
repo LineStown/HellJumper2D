@@ -44,7 +44,7 @@ namespace SCSIA
 
         private void Initialization()
         {
-            GameData.Initialization(_levelGeneratorConfig.LevelTimer);
+            Bootstrap.GameDataManager.Initialization(_levelGeneratorConfig.LevelTimer);
         }
 
         private void StopLevel()
@@ -56,7 +56,7 @@ namespace SCSIA
         {
             do
             {
-                GameData.SetTimer(_levelTimer);
+                Bootstrap.GameDataManager.SetTimer(_levelTimer);
                 yield return new WaitForSeconds(1f);
                 _levelTimer--;
             }

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace SCSIA
 {
-    [CreateAssetMenu(fileName = "PlatformGeneratorConfig", menuName = "Scriptable Objects/PlatformGeneratorConfig")]
+    [CreateAssetMenu(fileName = "PlatformGeneratorConfig", menuName = "Scriptable Objects/Generator/PlatformGeneratorConfig")]
     public class PlatformGeneratorConfig : ScriptableObject
     {
         //############################################################################################

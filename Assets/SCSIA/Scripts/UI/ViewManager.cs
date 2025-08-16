@@ -12,7 +12,8 @@ namespace SCSIA
         [SerializeField] private Canvas _gamePauseViewCanvas;
         [SerializeField] private Canvas _gameOverViewCanvas;
         [SerializeField] private List<GameObject> _stoppableObjects;
-        [SerializeField] private AudioSource _audioSource;
+        [SerializeField] private AudioClip _gameplayMusic;
+        [SerializeField] private AudioClip _gameOverSfx;
         private Canvas _currentView;
 
         //############################################################################################
@@ -27,7 +28,7 @@ namespace SCSIA
                     obj.SetActive(false);
                 _gamePauseViewCanvas.gameObject.SetActive(true);
                 _gameViewCanvas.gameObject.SetActive(false);
-                _audioSource.Pause();
+                Bootstrap.AudioManager.PauseMusic();
             }
         }
 
@@ -40,7 +41,8 @@ namespace SCSIA
                     obj.SetActive(false);
                 _gameOverViewCanvas.gameObject.SetActive(true);
                 _gameViewCanvas.gameObject.SetActive(false);
-                GameData.SaveScore();
+                Bootstrap.GameDataManager.SaveScore();
+                Bootstrap.AudioManager.PlaySFX(_gameOverSfx);
             }
         }
 
@@ -53,7 +55,7 @@ namespace SCSIA
                     obj.SetActive(true);
                 _gameViewCanvas.gameObject.SetActive(true);
                 _gamePauseViewCanvas.gameObject.SetActive(false);
-                _audioSource.UnPause();
+                Bootstrap.AudioManager.UnPauseMusic();
             }
         }
 
@@ -68,6 +70,8 @@ namespace SCSIA
         private void Initialization()
         {
             _currentView = _gameViewCanvas;
+            Bootstrap.AudioManager.StopMusic();
+            Bootstrap.AudioManager.PlayMusic(_gameplayMusic, 0.25f, true);
         }
     }
 }

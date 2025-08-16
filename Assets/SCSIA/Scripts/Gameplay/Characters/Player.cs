@@ -19,9 +19,10 @@ namespace SCSIA
 
         [Header("Audio")]
         [SerializeField] private AudioSource _audioSource;
-        [SerializeField] private AudioClip _audioJumpOn;
-        [SerializeField] private AudioClip _audioJumpOff;
-        [SerializeField] private AudioClip _audioBonus;
+        [SerializeField] private AudioClip _audioJump;
+        [SerializeField] private AudioClip _audioLanding;
+        [SerializeField] private AudioClip _audioGotBonus;
+        [SerializeField] private AudioClip _audioTouchFire;
 
         private InputSystem _inputSystem;
         private Vector3 _playerLeftTurn;
@@ -35,7 +36,7 @@ namespace SCSIA
         private float _screenMaxX;
 
         //############################################################################################
-        // PRIVATE METHODS
+        // PRIVATE UNITY METHODS
         //############################################################################################
         private void Awake()
         {
@@ -63,7 +64,7 @@ namespace SCSIA
             {
                 _playerRigitbody.AddForce(Vector3.up * _playerJumpfForce, ForceMode2D.Impulse);
                 _playerJump = false;
-                _audioSource.PlayOneShot(_audioJumpOn);
+                Bootstrap.AudioManager.PlaySFX(_audioJump, 0.5f);
             }
 
             // falling
@@ -88,7 +89,7 @@ namespace SCSIA
                     {
                         _platformRigidbody = platform.GetRigidbody();
                         platform.OnPlayerEnter();
-                        _audioSource.PlayOneShot(_audioJumpOff);
+                        Bootstrap.AudioManager.PlaySFX(_audioLanding, 0.5f);
                         break;
                     }
         }
@@ -111,16 +112,16 @@ namespace SCSIA
             IBonusCollision bonus = collision.gameObject.GetComponentInParent<IBonusCollision>();
             if(bonus != null)
             {
-                Debug.Log($"Player got bonus: type {bonus.GetBonusType()} points {_pointBonusConfig.GetPointsByBonus(bonus.GetBonusType())}");
-                GameData.AddScore(_pointBonusConfig.GetPointsByBonus(bonus.GetBonusType()));
-                GameData.AddLog("Player collected bonus " + _pointBonusConfig.GetPointsByBonus(bonus.GetBonusType()).ToString() + " point(s). Total score " + GameData.GetScore().ToString());
+                Bootstrap.GameDataManager.AddScore(_pointBonusConfig.GetPointsByBonus(bonus.GetBonusType()));
+                Bootstrap.GameDataManager.AddLog("Player collected bonus " + _pointBonusConfig.GetPointsByBonus(bonus.GetBonusType()).ToString() + " point(s). Total score " + Bootstrap.GameDataManager.GetScore().ToString());
                 bonus.OnPlayerEnter();
-                _audioSource.PlayOneShot(_audioBonus);
+                Bootstrap.AudioManager.PlaySFX(_audioGotBonus, 0.5f);
             }
             IEnemyCollision enemy = collision.gameObject.GetComponentInParent<IEnemyCollision>();
             if (enemy != null && !_playerNoJump)
             {
-                GameData.AddLog("Player NoJump mode on");
+                Bootstrap.GameDataManager.AddLog("Player NoJump mode on");
+                Bootstrap.AudioManager.PlaySFX(_audioTouchFire, 0.5f);
                 StartCoroutine(PlayerNoJump(_playerNoJumpTime));
             }
         }
@@ -142,10 +143,10 @@ namespace SCSIA
 
         private void SubscribeEvents()
         {
-            _inputSystem.Player.Enable();
             _inputSystem.Player.Move.performed += OnMove;
             _inputSystem.Player.Move.canceled += OnMove;
             _inputSystem.Player.Jump.performed += OnJump;
+            _inputSystem.Player.Enable();
         }
 
         private void UnsubscribeEvents()
@@ -176,12 +177,11 @@ namespace SCSIA
         private IEnumerator PlayerNoJump(float seconds)
         {
             _playerNoJump = true;
-            //Color oldColor= _playerSpriteRenderer.color;
             _playerSpriteRenderer.color = Color.red;
             yield return new WaitForSeconds(seconds);
             _playerNoJump = false;
             _playerSpriteRenderer.color = Color.white;
-            GameData.AddLog("Player NoJump mode off");
+            Bootstrap.GameDataManager.AddLog("Player NoJump mode off");
         }
     }
 }

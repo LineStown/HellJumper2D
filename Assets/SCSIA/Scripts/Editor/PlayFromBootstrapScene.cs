@@ -10,7 +10,7 @@ namespace SCSIA
         //############################################################################################
         // FIELDS
         //############################################################################################
-        private const string _startScenePath = "Assets/SCSIA/Scenes/MainMenu.unity";
+        private const string _startScenePath = "Assets/SCSIA/Scenes/BootstrapScene.unity";
 
         //############################################################################################
         // PRIVATE METHODS

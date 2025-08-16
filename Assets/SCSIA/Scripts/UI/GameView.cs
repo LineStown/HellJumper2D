@@ -31,22 +31,22 @@ namespace SCSIA
 
         private void UpdateTimerText()
         {
-            _timerText.text = GameData.GetTimer().ToString();
+            _timerText.text = Bootstrap.GameDataManager.GetTimer().ToString();
         }
 
         private void SubscribeEvents()
         {
-            GameData.SubscribeToScoreAction(OnScoreAction);
-            GameData.SubscribeToStageAction(OnStageAction);
-            GameData.SubscribeToTimerAction(OnTimerAction);
+            Bootstrap.GameDataManager?.SubscribeToScoreAction(OnScoreAction);
+            Bootstrap.GameDataManager?.SubscribeToStageAction(OnStageAction);
+            Bootstrap.GameDataManager?.SubscribeToTimerAction(OnTimerAction);
             _menuButton.onClick.AddListener(OnMenuButtonClick);
         }
 
         private void UnsubscribeEvents()
         {
-            GameData.UnsubscribeToScoreAction(OnScoreAction);
-            GameData.UnsubscribeToStageAction(OnStageAction);
-            GameData.UnsubscribeToTimerAction(OnTimerAction);
+            Bootstrap.GameDataManager?.UnsubscribeToScoreAction(OnScoreAction);
+            Bootstrap.GameDataManager?.UnsubscribeToStageAction(OnStageAction);
+            Bootstrap.GameDataManager?.UnsubscribeToTimerAction(OnTimerAction);
             _menuButton.onClick.RemoveListener(OnMenuButtonClick);
         }
 

@@ -11,6 +11,7 @@ namespace SCSIA
         //############################################################################################
         [SerializeField] private Button _newGameButton;
         [SerializeField] private Button _exitButton;
+        [SerializeField] private AudioClip _mainMenuBackgroundMusic;
 
         //############################################################################################
         // PRIVATE  METHODS
@@ -18,6 +19,8 @@ namespace SCSIA
         private void OnEnable()
         {
             SubscribeEvents();
+            Bootstrap.AudioManager.PlayMusic(_mainMenuBackgroundMusic, 0.5f, true);
+            Bootstrap.AudioManager.PlayMusic(_mainMenuBackgroundMusic, 0.5f);
         }
 
         private void OnDisable()
@@ -28,7 +31,7 @@ namespace SCSIA
         private void SubscribeEvents()
         {
             _newGameButton.onClick.AddListener(OnNewGameButtonClick);
-            _exitButton.onClick.AddListener(OnExitButtonClick);
+            _exitButton.onClick.AddListener(OnExitButtonClick); 
         }
 
         private void UnsubscribeEvents()

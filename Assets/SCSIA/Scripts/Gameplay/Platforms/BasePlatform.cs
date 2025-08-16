@@ -70,10 +70,6 @@ namespace SCSIA
         public virtual bool CorrectPlatformPlacePointInfo(ref PlatformPlacePointInfo platformPlacePointInfo)
         {
             platformPlacePointInfo.Set(platformPlacePointInfo.minX + _platformMD, platformPlacePointInfo.maxX - _platformMD);
-            if(platformPlacePointInfo.width < _platformRendererWidth)
-            {
-                Debug.Log(0);
-            }
             return platformPlacePointInfo.width > 0;       
         }
 
